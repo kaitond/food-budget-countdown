@@ -157,6 +157,14 @@
     background:#242c36;border:1px solid var(--line);color:var(--text);padding:11px 18px;border-radius:12px;
     font-size:13px;opacity:0;pointer-events:none;transition:opacity .25s,transform .25s;z-index:40;max-width:88%;text-align:center}
   .toast.on{opacity:1;transform:translate(-50%,0)}
+
+  #bootfix{position:fixed;inset:0;z-index:50;background:rgba(15,18,22,.96);
+    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;
+    padding:28px;text-align:center}
+  #bootfix b{font-size:16px}
+  #bootfix span{font-size:13px;color:var(--sub);line-height:1.7;max-width:340px}
+  #bootfix button{background:var(--ok);color:#05271b;border:none;border-radius:13px;
+    padding:14px 26px;font-size:15px;font-weight:800;font-family:inherit;cursor:pointer}
 </style>
 </head>
 <body>
@@ -293,5 +301,28 @@
 
 <script src="./supabase.js"></script>
 <script src="./app.js"></script>
+<script>
+/* app.js が動かなかったときの自己修復。
+   キャッシュ不整合などで JS が止まると、画面は出るのにボタンだけ効かない状態になるため、
+   その場で検知して案内する。記録データ（localStorage）は消さない。 */
+if (typeof render !== 'function') {
+  var d = document.createElement('div');
+  d.id = 'bootfix';
+  d.innerHTML = '<b>アプリを読み込めませんでした</b>'
+    + '<span>保存されているファイルが壊れている可能性があります。'
+    + '下のボタンで直ります。記録したデータは消えません。</span>'
+    + '<button type="button" id="bootfixBtn">修復して再読み込み</button>';
+  document.body.appendChild(d);
+  document.getElementById('bootfixBtn').onclick = function () {
+    this.textContent = '修復中…'; this.disabled = true;
+    var reload = function () { location.reload(); };
+    (navigator.serviceWorker ? navigator.serviceWorker.getRegistrations() : Promise.resolve([]))
+      .then(function (rs) { return Promise.all(rs.map(function (r) { return r.unregister(); })); })
+      .then(function () { return window.caches ? caches.keys() : []; })
+      .then(function (ks) { return Promise.all(ks.map(function (k) { return caches.delete(k); })); })
+      .then(reload, reload);
+  };
+}
+</script>
 </body>
 </html>
