@@ -26,28 +26,30 @@
     font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic UI","Meiryo",sans-serif;
     padding:calc(16px + env(safe-area-inset-top)) calc(14px + env(safe-area-inset-right))
             calc(64px + env(safe-area-inset-bottom)) calc(14px + env(safe-area-inset-left));
-    max-width:520px; margin:0 auto;
-    font-size:15px; line-height:1.6;
+    max-width:520px; margin:0 auto; font-size:15px; line-height:1.6;
   }
   h1{font-size:17px;margin:0;font-weight:700;letter-spacing:.02em}
-  .top{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+  .top{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:14px}
   .iconbtn{
     background:var(--card); border:1px solid var(--line); color:var(--sub);
-    width:38px;height:38px;border-radius:12px;font-size:17px;cursor:pointer;
+    width:38px;height:38px;border-radius:12px;font-size:17px;cursor:pointer;flex:0 0 auto;
     display:flex;align-items:center;justify-content:center;
   }
   .iconbtn:active{background:var(--card2)}
+  .badge{
+    font-size:10.5px;color:var(--dim);border:1px solid var(--line);background:var(--card);
+    padding:3px 9px;border-radius:99px;white-space:nowrap;margin-left:auto;
+  }
+  .badge.on{color:var(--ok);border-color:#1f4a3c}
+  .badge.off{color:var(--warn);border-color:#4a3d1f}
 
-  /* 週ナビ */
   .weeknav{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:12px}
   .weeknav .label{flex:1;text-align:center;font-size:13px;color:var(--sub)}
   .weeknav .label b{display:block;color:var(--text);font-size:15px;font-weight:600}
 
-  /* メインカード */
   .hero{
     background:linear-gradient(160deg,var(--card2),var(--card));
     border:1px solid var(--line); border-radius:22px; padding:22px 20px 18px; text-align:center;
-    position:relative; overflow:hidden;
   }
   .hero .cap{font-size:12px;color:var(--sub);letter-spacing:.08em}
   .amount{font-size:52px;font-weight:800;letter-spacing:-.02em;line-height:1.1;margin:6px 0 2px;
@@ -58,13 +60,11 @@
   .bar>i{display:block;height:100%;border-radius:99px;transition:width .45s ease,background .3s}
   .heromini{display:flex;justify-content:space-between;font-size:12px;color:var(--dim)}
 
-  /* 指標 3列 */
   .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px}
   .tile{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:11px 8px;text-align:center}
   .tile .t{font-size:10.5px;color:var(--dim);letter-spacing:.04em}
   .tile .v{font-size:17px;font-weight:700;margin-top:3px;font-variant-numeric:tabular-nums}
 
-  /* 日別バー */
   .days{display:flex;gap:5px;align-items:flex-end;height:74px;margin-top:14px;
         background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:10px 10px 8px}
   .day{flex:1;display:flex;flex-direction:column;align-items:center;gap:5px;height:100%;justify-content:flex-end}
@@ -74,99 +74,89 @@
   .day .d{font-size:9.5px;color:var(--dim)}
   .day.today .d{color:var(--text);font-weight:700}
 
-  /* セクション */
   .sec{margin-top:22px}
   .sec>h2{font-size:12px;color:var(--dim);margin:0 0 8px;font-weight:600;letter-spacing:.08em}
 
-  /* 入力 */
   .input{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:14px}
   .amt{display:flex;align-items:center;gap:8px;border-bottom:1px solid var(--line);padding-bottom:10px}
   .amt span{font-size:22px;color:var(--dim)}
-  .amt input{
-    flex:1;background:none;border:none;outline:none;color:var(--text);
-    font-size:32px;font-weight:700;width:100%;font-variant-numeric:tabular-nums;
-  }
+  .amt input{flex:1;background:none;border:none;outline:none;color:var(--text);
+    font-size:32px;font-weight:700;width:100%;font-variant-numeric:tabular-nums}
   .chips{display:flex;flex-wrap:wrap;gap:6px;margin:12px 0}
-  .chip{
-    background:var(--card2);border:1px solid var(--line);color:var(--sub);
-    padding:7px 12px;border-radius:99px;font-size:12.5px;cursor:pointer;
-  }
+  .chip{background:var(--card2);border:1px solid var(--line);color:var(--sub);
+    padding:7px 12px;border-radius:99px;font-size:12.5px;cursor:pointer}
   .chip.on{background:var(--accent);border-color:var(--accent);color:#0b1220;font-weight:700}
   .row{display:flex;gap:8px}
   .row input[type=date],.row input[type=text]{
     flex:1;background:var(--card2);border:1px solid var(--line);border-radius:10px;
-    color:var(--text);padding:9px 11px;font-size:13.5px;outline:none;font-family:inherit;min-width:0;
-  }
-  .attach{
-    display:flex;align-items:center;justify-content:center;gap:6px;margin-top:8px;
+    color:var(--text);padding:9px 11px;font-size:13.5px;outline:none;font-family:inherit;min-width:0}
+  .attach{display:flex;align-items:center;justify-content:center;gap:6px;margin-top:8px;
     background:var(--card2);border:1px dashed var(--line);border-radius:10px;
-    padding:9px;font-size:12.5px;color:var(--sub);cursor:pointer;
-  }
+    padding:9px;font-size:12.5px;color:var(--sub);cursor:pointer}
   .attach.hasimg{border-style:solid;border-color:var(--accent);color:var(--accent)}
-  .btn{
-    width:100%;margin-top:10px;padding:14px;border:none;border-radius:13px;
-    background:var(--ok);color:#05271b;font-size:15px;font-weight:800;cursor:pointer;font-family:inherit;
-  }
+  .btn{width:100%;margin-top:10px;padding:14px;border:none;border-radius:13px;
+    background:var(--ok);color:#05271b;font-size:15px;font-weight:800;cursor:pointer;font-family:inherit}
   .btn:active{opacity:.85}
   .btn[disabled]{background:var(--card2);color:var(--dim);cursor:default}
+  .btn.sub2{background:var(--card2);color:var(--text);border:1px solid var(--line);font-weight:700}
 
-  /* 明細 */
   .list{display:flex;flex-direction:column;gap:8px}
   .dayhead{font-size:11.5px;color:var(--dim);margin:8px 2px 0}
-  .item{
-    display:flex;align-items:center;gap:10px;background:var(--card);
-    border:1px solid var(--line);border-radius:13px;padding:10px 12px;
-  }
+  .item{display:flex;align-items:center;gap:10px;background:var(--card);
+    border:1px solid var(--line);border-radius:13px;padding:10px 12px}
   .item .ic{width:34px;height:34px;border-radius:10px;background:var(--card2);
-            display:flex;align-items:center;justify-content:center;font-size:16px;flex:0 0 auto}
+    display:flex;align-items:center;justify-content:center;font-size:16px;flex:0 0 auto}
   .item .ic img{width:100%;height:100%;object-fit:cover;border-radius:10px}
   .item .m{flex:1;min-width:0}
-  .item .m b{display:block;font-size:13.5px;font-weight:600}
+  .item .m b{display:block;font-size:13.5px;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
   .item .m small{color:var(--dim);font-size:11.5px}
   .item .p{font-weight:700;font-variant-numeric:tabular-nums;font-size:15px}
   .item .x{background:none;border:none;color:var(--dim);font-size:17px;cursor:pointer;padding:0 2px}
   .empty{text-align:center;color:var(--dim);font-size:13px;padding:26px 0}
 
-  /* モーダル */
   .mask{position:fixed;inset:0;background:rgba(0,0,0,.66);display:none;align-items:flex-end;justify-content:center;z-index:20}
   .mask.on{display:flex}
-  .sheet{
-    background:var(--card);width:100%;max-width:520px;border-radius:20px 20px 0 0;
+  .sheet{background:var(--card);width:100%;max-width:520px;border-radius:20px 20px 0 0;
     padding:20px 18px calc(30px + env(safe-area-inset-bottom));
-    max-height:88vh;overflow:auto;border-top:1px solid var(--line);
-  }
+    max-height:88vh;overflow:auto;border-top:1px solid var(--line)}
   .sheet h3{margin:0 0 16px;font-size:16px}
   .field{margin-bottom:16px}
   .field label{display:block;font-size:12px;color:var(--sub);margin-bottom:6px}
-  .field input[type=number],.field select{
+  .field input[type=number],.field input[type=text],.field select{
     width:100%;background:var(--card2);border:1px solid var(--line);border-radius:11px;
-    color:var(--text);padding:12px;font-size:16px;outline:none;font-family:inherit;
-  }
+    color:var(--text);padding:12px;font-size:16px;outline:none;font-family:inherit}
   .switch{display:flex;align-items:center;justify-content:space-between;
-          background:var(--card2);border:1px solid var(--line);border-radius:11px;padding:12px}
+    background:var(--card2);border:1px solid var(--line);border-radius:11px;padding:12px}
   .switch small{display:block;color:var(--dim);font-size:11px;margin-top:2px}
   .toggle{width:46px;height:27px;border-radius:99px;background:#39414d;position:relative;
-          cursor:pointer;flex:0 0 auto;transition:background .2s}
+    cursor:pointer;flex:0 0 auto;transition:background .2s}
   .toggle::after{content:"";position:absolute;top:3px;left:3px;width:21px;height:21px;border-radius:50%;
-                 background:#fff;transition:transform .2s}
+    background:#fff;transition:transform .2s}
   .toggle.on{background:var(--ok)}
   .toggle.on::after{transform:translateX(19px)}
   .minibtns{display:flex;gap:8px;margin-top:4px}
-  .minibtns button{
-    flex:1;background:var(--card2);border:1px solid var(--line);color:var(--sub);
-    border-radius:11px;padding:11px;font-size:12.5px;cursor:pointer;font-family:inherit;
-  }
+  .minibtns button{flex:1;background:var(--card2);border:1px solid var(--line);color:var(--sub);
+    border-radius:11px;padding:11px;font-size:12.5px;cursor:pointer;font-family:inherit}
   .danger{color:var(--ng)!important;border-color:#4a2530!important}
+  .hr{height:1px;background:var(--line);margin:20px 0}
+  .note{font-size:11.5px;color:var(--dim);line-height:1.6;margin:8px 0 0}
+  .codebox{background:var(--card2);border:1px solid var(--line);border-radius:11px;padding:12px;
+    font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12.5px;word-break:break-all;color:var(--accent)}
   .viewer{position:fixed;inset:0;background:rgba(0,0,0,.9);display:none;align-items:center;
-          justify-content:center;z-index:30;padding:18px}
+    justify-content:center;z-index:30;padding:18px}
   .viewer.on{display:flex}
   .viewer img{max-width:100%;max-height:100%;border-radius:12px}
+  .toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom));transform:translate(-50%,20px);
+    background:#242c36;border:1px solid var(--line);color:var(--text);padding:11px 18px;border-radius:12px;
+    font-size:13px;opacity:0;pointer-events:none;transition:opacity .25s,transform .25s;z-index:40;max-width:88%;text-align:center}
+  .toast.on{opacity:1;transform:translate(-50%,0)}
 </style>
 </head>
 <body>
 
 <div class="top">
   <h1>🍚 食費カウントダウン</h1>
+  <span class="badge" id="badge">この端末のみ</span>
   <button class="iconbtn" id="btnSet" title="設定">⚙</button>
 </div>
 
@@ -181,10 +171,7 @@
   <div class="amount" id="remain"><span class="yen">¥</span>0</div>
   <div class="sub" id="remainSub">—</div>
   <div class="bar"><i id="barFill" style="width:0%"></i></div>
-  <div class="heromini">
-    <span id="usedTxt">使った ¥0</span>
-    <span id="budgetTxt">週予算 ¥0</span>
-  </div>
+  <div class="heromini"><span id="usedTxt">使った ¥0</span><span id="budgetTxt">週予算 ¥0</span></div>
 </div>
 
 <div class="grid3">
@@ -221,6 +208,7 @@
 <div class="mask" id="mask">
   <div class="sheet">
     <h3>設定</h3>
+
     <div class="field">
       <label>月の食費予算（円）</label>
       <input type="number" id="setBudget" inputmode="numeric">
@@ -240,6 +228,46 @@
       </div>
     </div>
     <div class="field">
+      <label>この端末の表示名（明細に表示されます）</label>
+      <input type="text" id="setWho" placeholder="例：夫 / 妻 / たろう" maxlength="12">
+    </div>
+
+    <div class="hr"></div>
+
+    <!-- 未共有のとき -->
+    <div id="shareLocal">
+      <div class="field">
+        <label>夫婦で共有する</label>
+        <button class="btn" id="btnShare">夫婦で共有をはじめる</button>
+        <p class="note">共有コードが発行されます。相手の端末でそのコード（または参加用リンク）を開くと、
+          入力内容がお互いの画面にリアルタイムで反映されます。</p>
+      </div>
+      <div class="field">
+        <label>すでに相手が共有をはじめている場合</label>
+        <input type="text" id="joinCode" placeholder="共有コードを貼り付け" autocapitalize="off" autocomplete="off" spellcheck="false">
+        <div class="minibtns"><button id="btnJoin">この共有に参加する</button></div>
+      </div>
+    </div>
+
+    <!-- 共有中のとき -->
+    <div id="shareOn" style="display:none">
+      <div class="field">
+        <label>共有コード</label>
+        <div class="codebox" id="codeText">—</div>
+        <div class="minibtns">
+          <button id="btnShowCode">表示</button>
+          <button id="btnCopy">参加用リンクをコピー</button>
+        </div>
+        <p class="note">このリンクを知っている人は誰でも閲覧・編集できます。渡す相手にご注意ください。</p>
+      </div>
+      <div class="field">
+        <div class="minibtns"><button id="btnLeave" class="danger">共有を解除する</button></div>
+      </div>
+    </div>
+
+    <div class="hr"></div>
+
+    <div class="field">
       <label>データ</label>
       <div class="minibtns">
         <button id="btnExport">書き出し</button>
@@ -248,280 +276,15 @@
       </div>
       <input type="file" id="fileImport" accept="application/json" hidden>
     </div>
+
     <button class="btn" id="btnSave">保存する</button>
   </div>
 </div>
 
 <div class="viewer" id="viewer"><img id="viewerImg" alt="レシート"></div>
+<div class="toast" id="toastEl"></div>
 
-<script>
-/* ============ データ ============ */
-const KEY = 'foodBudget.v1';
-const CATS = [
-  {id:'super', name:'スーパー', icon:'🛒'},
-  {id:'conv',  name:'コンビニ', icon:'🏪'},
-  {id:'eat',   name:'外食',     icon:'🍜'},
-  {id:'cafe',  name:'カフェ',   icon:'☕'},
-  {id:'deli',  name:'惣菜・弁当', icon:'🍱'},
-  {id:'other', name:'その他',   icon:'🧺'},
-];
-const DEF = { budget:40000, mode:'date', carry:false, items:[] };
-let S = load();
-let cursor = new Date();          // 表示中の週に含まれる日
-let curCat = 'super';
-let curPhoto = null;
-
-function load(){
-  try{ return Object.assign({}, DEF, JSON.parse(localStorage.getItem(KEY)||'{}')); }
-  catch(e){ return Object.assign({}, DEF); }
-}
-function save(){
-  try{ localStorage.setItem(KEY, JSON.stringify(S)); }
-  catch(e){ alert('保存できませんでした。ブラウザの保存容量がいっぱい（レシート写真が多い）か、保存が許可されていない可能性があります。'); }
-}
-
-/* ============ 日付ユーティリティ ============ */
-const ymd = d => d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
-const parse = s => { const [y,m,d]=s.split('-').map(Number); return new Date(y,m-1,d); };
-const addDays = (d,n) => { const x=new Date(d); x.setDate(x.getDate()+n); return x; };
-const daysInMonth = d => new Date(d.getFullYear(), d.getMonth()+1, 0).getDate();
-const sameDay = (a,b) => ymd(a)===ymd(b);
-const WD = ['日','月','火','水','木','金','土'];
-
-/* その日1日ぶんに使える額（月予算をその月の日数で日割り） */
-function dayBudget(d){ return S.budget / daysInMonth(d); }
-
-/* 表示中の週の範囲を返す */
-function weekRange(d){
-  if(S.mode==='date'){
-    const last = daysInMonth(d);
-    const start = Math.floor((d.getDate()-1)/7)*7 + 1;      // 1,8,15,22,29
-    const end   = Math.min(start+6, last);
-    return { s:new Date(d.getFullYear(),d.getMonth(),start), e:new Date(d.getFullYear(),d.getMonth(),end) };
-  }
-  const base = S.mode==='mon' ? 1 : 0;                       // 週のはじまりの曜日
-  const diff = (d.getDay() - base + 7) % 7;
-  const s = addDays(d, -diff);
-  return { s, e: addDays(s, 6) };
-}
-function eachDay(r){
-  const out=[]; for(let x=new Date(r.s); x<=r.e; x=addDays(x,1)) out.push(new Date(x));
-  return out;
-}
-/* 週番号（date モードのみ意味を持つ） */
-function weekLabel(r){
-  const m = r.s.getMonth()+1;
-  if(S.mode==='date') return m+'月 第'+(Math.floor((r.s.getDate()-1)/7)+1)+'週';
-  return m+'月'+r.s.getDate()+'日の週';
-}
-
-/* ============ 集計 ============ */
-const spentOn = d => S.items.filter(i=>i.date===ymd(d)).reduce((a,b)=>a+b.amount,0);
-function sumRange(r){ return eachDay(r).reduce((a,d)=>a+spentOn(d),0); }
-function budgetRange(r){ return eachDay(r).reduce((a,d)=>a+dayBudget(d),0); }
-
-/* 繰越：週のはじまりと同じ月の、それ以前の日の（予算 − 実績） */
-function carryOver(r){
-  if(!S.carry) return 0;
-  let c = 0;
-  const m = r.s.getMonth(), y = r.s.getFullYear();
-  for(let day=1; day<r.s.getDate(); day++){
-    const d = new Date(y, m, day);
-    c += dayBudget(d) - spentOn(d);
-  }
-  return c;
-}
-
-/* ============ 描画 ============ */
-function render(){
-  const r = weekRange(cursor);
-  const today = new Date();
-  const days = eachDay(r);
-
-  // 週ヘッダ
-  wTitle.textContent = weekLabel(r);
-  wRange.textContent = `${r.s.getMonth()+1}/${r.s.getDate()}(${WD[r.s.getDay()]}) 〜 ${r.e.getMonth()+1}/${r.e.getDate()}(${WD[r.e.getDay()]})`;
-
-  // 金額
-  const budget = budgetRange(r);
-  const carry  = carryOver(r);
-  const used   = sumRange(r);
-  const total  = budget + carry;
-  const remain = total - used;
-
-  const color = remain < 0 ? 'var(--ng)' : (remain < total*0.2 ? 'var(--warn)' : 'var(--ok)');
-  const el = document.getElementById('remain');
-  el.innerHTML = '<span class="yen">¥</span>' + Math.round(Math.abs(remain)).toLocaleString();
-  el.style.color = color;
-  if(remain < 0) el.innerHTML = '<span class="yen">−¥</span>' + Math.round(-remain).toLocaleString();
-
-  const pct = total>0 ? Math.min(100, used/total*100) : 0;
-  barFill.style.width = pct+'%';
-  barFill.style.background = color;
-  usedTxt.textContent   = '使った ¥' + Math.round(used).toLocaleString();
-  budgetTxt.textContent = '週予算 ¥' + Math.round(budget).toLocaleString() +
-                          (carry ? (carry>0?' +繰越 ¥':' −繰越 ¥') + Math.round(Math.abs(carry)).toLocaleString() : '');
-
-  // 残り日数（今日が週内なら今日を含む残り、過去週なら0、未来週なら全日）
-  let left;
-  if(today > r.e) left = 0;
-  else if(today < r.s) left = days.length;
-  else left = days.filter(d => d >= new Date(today.getFullYear(),today.getMonth(),today.getDate())).length;
-
-  daysLeft.textContent = left + '日';
-  perDay.textContent   = left>0 ? '¥'+Math.round(Math.max(0,remain)/left).toLocaleString() : '—';
-  remainSub.textContent = remain < 0
-    ? `週予算を ¥${Math.round(-remain).toLocaleString()} オーバー中`
-    : (left>0 ? `残り${left}日 ／ 1日 ¥${Math.round(remain/left).toLocaleString()} ペース` : 'この週は終了しました');
-
-  // 今月の残り
-  const mStart = new Date(cursor.getFullYear(), cursor.getMonth(), 1);
-  const mEnd   = new Date(cursor.getFullYear(), cursor.getMonth(), daysInMonth(cursor));
-  const mUsed  = sumRange({s:mStart,e:mEnd});
-  monthLeft.textContent = '¥' + Math.round(S.budget - mUsed).toLocaleString();
-  monthLeft.style.color = (S.budget - mUsed) < 0 ? 'var(--ng)' : 'var(--text)';
-
-  // 日別バー
-  const max = Math.max(dayBudget(r.s)*1.2, ...days.map(spentOn), 1);
-  dayBars.innerHTML = days.map(d=>{
-    const v = spentOn(d);
-    const h = Math.max(3, v/max*52);
-    const cls = v===0 ? '' : (v > dayBudget(d) ? 'over' : 'has');
-    return `<div class="day ${sameDay(d,today)?'today':''}">
-      <div class="col ${cls}" style="height:${h}px"></div>
-      <div class="d">${d.getDate()}</div></div>`;
-  }).join('');
-
-  // 明細
-  const items = S.items
-    .filter(i => i.date >= ymd(r.s) && i.date <= ymd(r.e))
-    .sort((a,b)=> a.date===b.date ? b.id-a.id : b.date.localeCompare(a.date));
-  cnt.textContent = items.length ? `(${items.length}件)` : '';
-  if(!items.length){
-    list.innerHTML = '<div class="empty">まだ入力がありません</div>';
-  }else{
-    let html='', lastDate='';
-    for(const it of items){
-      if(it.date!==lastDate){
-        const d = parse(it.date);
-        html += `<div class="dayhead">${d.getMonth()+1}/${d.getDate()}(${WD[d.getDay()]})　¥${spentOn(d).toLocaleString()}</div>`;
-        lastDate = it.date;
-      }
-      const c = CATS.find(c=>c.id===it.cat) || CATS[5];
-      html += `<div class="item">
-        <div class="ic">${it.photo?`<img src="${it.photo}" data-view="${it.id}">`:c.icon}</div>
-        <div class="m"><b>${it.memo ? esc(it.memo) : c.name}</b><small>${c.name}</small></div>
-        <div class="p">¥${it.amount.toLocaleString()}</div>
-        <button class="x" data-del="${it.id}">✕</button>
-      </div>`;
-    }
-    list.innerHTML = html;
-  }
-}
-const esc = s => s.replace(/[&<>"]/g, m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]));
-
-/* ============ 入力 ============ */
-cats.innerHTML = CATS.map(c=>`<div class="chip ${c.id===curCat?'on':''}" data-cat="${c.id}">${c.icon} ${c.name}</div>`).join('');
-cats.onclick = e => {
-  const t = e.target.closest('[data-cat]'); if(!t) return;
-  curCat = t.dataset.cat;
-  [...cats.children].forEach(c=>c.classList.toggle('on', c.dataset.cat===curCat));
-};
-inDate.value = ymd(new Date());
-inAmount.addEventListener('input', ()=>{ btnAdd.disabled = !(Number(inAmount.value)>0); });
-
-inPhoto.onchange = e => {
-  const f = e.target.files[0]; if(!f) return;
-  const img = new Image();
-  img.onload = () => {
-    const max = 700, sc = Math.min(1, max/Math.max(img.width,img.height));
-    const cv = document.createElement('canvas');
-    cv.width = img.width*sc; cv.height = img.height*sc;
-    cv.getContext('2d').drawImage(img,0,0,cv.width,cv.height);
-    curPhoto = cv.toDataURL('image/jpeg', 0.6);
-    attachLabel.classList.add('hasimg');
-    attachTxt.textContent = '✓ レシートを添付しました（タップで変更）';
-  };
-  img.src = URL.createObjectURL(f);
-};
-
-btnAdd.onclick = () => {
-  const a = Math.round(Number(inAmount.value));
-  if(!(a>0)) return;
-  S.items.push({ id:Date.now(), date:inDate.value||ymd(new Date()), amount:a, cat:curCat, memo:inMemo.value.trim(), photo:curPhoto });
-  save();
-  cursor = parse(inDate.value||ymd(new Date()));
-  inAmount.value=''; inMemo.value=''; curPhoto=null;
-  attachLabel.classList.remove('hasimg'); attachTxt.textContent='📷 レシート写真を添付（任意）'; inPhoto.value='';
-  btnAdd.disabled = true;
-  render();
-};
-
-list.onclick = e => {
-  const del = e.target.closest('[data-del]');
-  if(del){
-    if(confirm('この記録を削除しますか？')){
-      S.items = S.items.filter(i=>i.id!=del.dataset.del); save(); render();
-    }
-    return;
-  }
-  const v = e.target.closest('[data-view]');
-  if(v){ viewerImg.src = v.src; viewer.classList.add('on'); }
-};
-viewer.onclick = () => viewer.classList.remove('on');
-
-/* ============ 週送り ============ */
-prevW.onclick = () => { cursor = addDays(weekRange(cursor).s, -1); render(); };
-nextW.onclick = () => { cursor = addDays(weekRange(cursor).e,  1); render(); };
-
-/* ============ 設定 ============ */
-btnSet.onclick = () => {
-  setBudget.value = S.budget;
-  setMode.value   = S.mode;
-  setCarry.classList.toggle('on', S.carry);
-  mask.classList.add('on');
-};
-mask.onclick = e => { if(e.target===mask) mask.classList.remove('on'); };
-setCarry.onclick = () => setCarry.classList.toggle('on');
-btnSave.onclick = () => {
-  S.budget = Math.max(0, Math.round(Number(setBudget.value)||0));
-  S.mode   = setMode.value;
-  S.carry  = setCarry.classList.contains('on');
-  save(); mask.classList.remove('on'); render();
-};
-btnExport.onclick = () => {
-  const blob = new Blob([JSON.stringify(S,null,2)],{type:'application/json'});
-  const a = document.createElement('a');
-  a.href = URL.createObjectURL(blob);
-  a.download = 'foodbudget_'+ymd(new Date())+'.json';
-  a.click();
-};
-btnImport.onclick = () => fileImport.click();
-fileImport.onchange = e => {
-  const f = e.target.files[0]; if(!f) return;
-  const rd = new FileReader();
-  rd.onload = () => {
-    try{
-      const d = JSON.parse(rd.result);
-      if(!Array.isArray(d.items)) throw 0;
-      S = Object.assign({}, DEF, d); save(); mask.classList.remove('on'); render();
-    }catch(err){ alert('読み込めませんでした'); }
-  };
-  rd.readAsText(f);
-};
-btnClear.onclick = () => {
-  if(confirm('すべての記録と設定を消します。よろしいですか？')){
-    localStorage.removeItem(KEY); S = Object.assign({}, DEF);
-    mask.classList.remove('on'); render();
-  }
-};
-
-render();
-
-/* ============ PWA（オフライン動作・ホーム画面追加） ============ */
-if('serviceWorker' in navigator && location.protocol.startsWith('http')){
-  window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js').catch(()=>{}));
-}
-</script>
+<script src="./supabase.js"></script>
+<script src="./app.js"></script>
 </body>
 </html>

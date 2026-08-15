@@ -1,9 +1,11 @@
 /* 食費カウントダウン — オフライン用 Service Worker */
-const VERSION = 'v1';
+const VERSION = 'v2';
 const CACHE = 'foodbudget-' + VERSION;
 const ASSETS = [
   './',
   './index.html',
+  './app.js',
+  './supabase.js',
   './manifest.webmanifest',
   './icon-192.png',
   './icon-512.png',
@@ -22,17 +24,28 @@ self.addEventListener('activate', e => {
   );
 });
 
-/* キャッシュ優先で即表示しつつ、裏で最新を取り直す（次回起動時に反映） */
+/* HTML と JS は「通信優先・失敗したらキャッシュ」＝更新が即反映され、圏外でも動く
+   画像やmanifestは「キャッシュ優先」＝表示が速い */
 self.addEventListener('fetch', e => {
   const req = e.request;
-  if (req.method !== 'GET' || new URL(req.url).origin !== location.origin) return;
-  e.respondWith(
-    caches.match(req).then(hit => {
-      const net = fetch(req).then(res => {
-        if (res && res.ok) caches.open(CACHE).then(c => c.put(req, res.clone()));
+  const url = new URL(req.url);
+  if (req.method !== 'GET' || url.origin !== location.origin) return;
+
+  const fresh = req.mode === 'navigate' || /\.(html|js)$/.test(url.pathname) || url.pathname.endsWith('/');
+
+  if (fresh) {
+    e.respondWith(
+      fetch(req).then(res => {
+        if (res && res.ok) { const cp = res.clone(); caches.open(CACHE).then(c => c.put(req, cp)); }
         return res;
-      }).catch(() => hit);
-      return hit || net;
-    })
+      }).catch(() => caches.match(req).then(hit => hit || caches.match('./index.html')))
+    );
+    return;
+  }
+  e.respondWith(
+    caches.match(req).then(hit => hit || fetch(req).then(res => {
+      if (res && res.ok) { const cp = res.clone(); caches.open(CACHE).then(c => c.put(req, cp)); }
+      return res;
+    }))
   );
 });
