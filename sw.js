@@ -1,5 +1,5 @@
 /* 食費カウントダウン — オフライン用 Service Worker */
-const VERSION = 'v2';
+const VERSION = 'v3';
 const CACHE = 'foodbudget-' + VERSION;
 const ASSETS = [
   './',
